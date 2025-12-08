@@ -1,0 +1,9 @@
+/* Smooth scroll */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Animaciones sutiles */
+.hover\:shadow-xl {
+    transition: all 0.3s ease;
+}

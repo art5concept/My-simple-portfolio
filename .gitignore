@@ -1,0 +1,23 @@
+# === Archivos de sistema ===
+.DS_Store
+Thumbs.db
+
+# === Archivos temporales ===
+*.log
+*.tmp
+*.bak
+*.txt
+*~
+
+# === Configuración de IDE ===
+.vscode/
+.idea/
+# Excluir archivos específicos de editores
+*.swp
+
+# === Archivos de dependencias ===
+node_modules/
+
+
+# === Imagenes previas ===
+images/locals/

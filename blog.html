@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Blog / Proyectos personales de Félix Lara - Arduino, Scripts, Labs.">
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Config colors + dark mode -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        tone: {
+                            dark: '#011F26',
+                            teal: '#025E73',
+                            olive: '#A5A692',
+                            beige: '#BFB78F',
+                            gold: '#F2A71B',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- FOUC / preferencia -->
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <title>Blog — Félix Lara</title>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-900 dark:bg-tone-dark dark:text-gray-100 transition-colors duration-300">
+
+    <!-- Toggle tema (misma lógica visual que index) -->
+    <button id="theme-toggle"
+        class="fixed top-6 right-6 z-50 p-2 rounded-full bg-white text-gray-500 hover:bg-gray-100 shadow-lg dark:bg-tone-teal dark:text-gray-200 transition-all">
+        <svg id="theme-toggle-light-icon" class="w-6 h-6 hidden dark:block" fill="none" stroke="currentColor"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
+            </path>
+        </svg>
+        <svg id="theme-toggle-dark-icon" class="w-6 h-6 block dark:hidden" fill="none" stroke="currentColor"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+        </svg>
+    </button>
+
+    <!-- Cabecera con nav -->
+    <header class="container mx-auto px-6 py-10 max-w-5xl flex items-center justify-between">
+        <h1 class="text-3xl font-bold text-tone-dark dark:text-white">Blog / Proyectos</h1>
+        <nav class="space-x-4">
+            <a href="index.html" class="text-sm text-gray-700 dark:text-gray-300 hover:underline">Inicio</a>
+            <a href="blog.html" class="text-sm text-gray-700 dark:text-gray-300 font-medium hover:underline">Blog</a>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 pb-20 max-w-6xl">
+        <p class="text-gray-700 dark:text-gray-300 mb-6">Aquí puedes listar proyectos personales, guías y experimentos
+            (Arduino, hardware, scripts, etc.).</p>
+
+        <div class="grid md:grid-cols-2 gap-6">
+            <!-- Ejemplo entrada 1 -->
+            <article
+                class="bg-white dark:bg-tone-teal/10 border border-gray-200 dark:border-tone-teal/40 rounded-lg p-6 shadow-sm">
+                <h2 class="text-xl font-semibold text-tone-dark dark:text-white mb-2">Arduino: Sensor de distancia con
+                    alerta</h2>
+                <p class="text-gray-600 dark:text-gray-400 mb-4 text-sm">Proyecto de ejemplo con HC-SR04 + buzzer.
+                    Código, circuito y explicación.</p>
+                <div class="flex gap-3">
+                    <a href="#" class="text-sm text-tone-gold hover:underline">Leer →</a>
+                    <a href="#" class="text-sm text-gray-500 hover:underline">Código (GitHub)</a>
+                </div>
+            </article>
+
+            <!-- Ejemplo entrada 2 -->
+            <article
+                class="bg-white dark:bg-tone-teal/10 border border-gray-200 dark:border-tone-teal/40 rounded-lg p-6 shadow-sm">
+                <h2 class="text-xl font-semibold text-tone-dark dark:text-white mb-2">Automatización backups con rsync
+                </h2>
+                <p class="text-gray-600 dark:text-gray-400 mb-4 text-sm">Script y explicación para backups incrementales
+                    en Linux (rsync + systemd timer).</p>
+                <div class="flex gap-3">
+                    <a href="#" class="text-sm text-tone-gold hover:underline">Leer →</a>
+                    <a href="#" class="text-sm text-gray-500 hover:underline">Scripts</a>
+                </div>
+            </article>
+
+            <!-- Agrega más entradas aquí -->
+        </div>
+    </main>
+
+    <footer class="container mx-auto px-6 pb-12 max-w-5xl text-sm text-gray-600 dark:text-gray-400">
+        <p>Félix Lara — Proyectos personales</p>
+    </footer>
+
+    <script>
+        // Toggle tema (idéntico al de index)
+        var themeToggleBtn = document.getElementById('theme-toggle');
+        var darkIcon = document.getElementById('theme-toggle-dark-icon');
+        var lightIcon = document.getElementById('theme-toggle-light-icon');
+
+        themeToggleBtn.addEventListener('click', function () {
+            darkIcon.classList.toggle('hidden');
+            lightIcon.classList.toggle('hidden');
+
+            if (localStorage.getItem('theme')) {
+                if (localStorage.getItem('theme') === 'light') {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                }
+            } else {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>
