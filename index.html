@@ -16,6 +16,9 @@
             darkMode: 'class', // Habilitar modo oscuro manual
             theme: {
                 extend: {
+                    screens: {
+                        'xs': '375px', // Breakpoint personalizado para móviles medianos
+                    },
                     colors: {
                         tone: {
                             dark: '#011F26',    // Fondo principal
@@ -81,7 +84,7 @@
 
     <!-- Botón Toggle Tema -->
     <button id="theme-toggle"
-        class="fixed top-6 right-6 z-50 p-2 rounded-full bg-white text-gray-500 hover:bg-gray-100 shadow-lg dark:bg-tone-teal dark:text-gray-200 dark:hover:bg-tone-teal/80 transition-all">
+        class="absolute top-6 right-6 z-50 p-2 rounded-full bg-white text-gray-500 hover:bg-gray-100 shadow-lg dark:bg-tone-teal dark:text-gray-200 dark:hover:bg-tone-teal/80 transition-all">
         <!-- Icono Sol (para activar light) -->
         <svg id="theme-toggle-light-icon" class="w-6 h-6 hidden dark:block" fill="none" stroke="currentColor"
             viewBox="0 0 24 24">
@@ -98,7 +101,7 @@
     </button>
 
     <!-- HERO -->
-    <header class="container mx-auto px-6 py-20 max-w-5xl">
+    <header class="container mx-auto px-4 sm:px-6 py-20 max-w-5xl">
         <!-- Nuevo: navegación simple con enlace a Blog -->
         <div class="flex justify-end mb-6">
             <nav class="space-x-4">
@@ -124,9 +127,9 @@
                     mantenibilidad y rendimiento sobre stacks innecesariamente complejos. <br>
                     Busco mi primera oportunidad profesional para aplicar mi capacidad lógica y seguir aprendiendo.
                 </p>
-                <div class="flex justify-center md:justify-start gap-4">
+                <div class="flex flex-wrap justify-center md:justify-start gap-4">
                     <a href="mailto:felix@tudominio.com"
-                        class="inline-flex items-center gap-2 bg-tone-gold text-tone-dark font-bold px-6 py-3 rounded-lg hover:bg-yellow-500 transition shadow-lg shadow-yellow-900/20">
+                        class="inline-flex items-center gap-2 bg-tone-gold text-tone-dark font-bold px-5 sm:px-6 py-3 rounded-lg hover:bg-yellow-500 transition shadow-lg shadow-yellow-900/20">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -134,7 +137,7 @@
                         Contáctame
                     </a>
                     <a href="#proyectos"
-                        class="inline-flex items-center gap-2 bg-transparent border border-tone-teal text-tone-teal hover:bg-tone-teal/10 dark:border-tone-beige dark:text-tone-beige px-6 py-3 rounded-lg dark:hover:bg-tone-teal/30 transition">
+                        class="inline-flex items-center gap-2 bg-transparent border border-tone-teal text-tone-teal hover:bg-tone-teal/10 dark:border-tone-beige dark:text-tone-beige px-5 sm:px-6 py-3 rounded-lg dark:hover:bg-tone-teal/30 transition">
                         Ver proyectos
                     </a>
                 </div>
@@ -155,7 +158,7 @@
     </header>
 
     <!-- ABOUT -->
-    <section class="container mx-auto px-6 py-16 max-w-5xl border-t border-gray-200 dark:border-tone-teal/30">
+    <section class="container mx-auto px-4 sm:px-6 py-16 max-w-5xl border-t border-gray-200 dark:border-tone-teal/30">
         <h2 class="text-2xl font-bold mb-8 text-tone-dark dark:text-white flex items-center gap-3">
             <span class="w-8 h-1 bg-tone-gold rounded-full"></span>
             Sobre mí
@@ -192,15 +195,15 @@
     </section>
 
     <!-- SKILLS -->
-    <section class="container mx-auto px-6 py-16 max-w-6xl border-t border-gray-200 dark:border-tone-teal/30">
+    <section class="container mx-auto px-4 sm:px-6 py-16 max-w-6xl border-t border-gray-200 dark:border-tone-teal/30">
         <h2 class="text-2xl font-bold mb-10 text-tone-dark dark:text-white flex items-center gap-3">
             <span class="w-8 h-1 bg-tone-gold rounded-full"></span>
             Tecnologías que uso
         </h2>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div class="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-4 gap-6">
 
             <div
-                class="bg-white border-gray-200 shadow-sm dark:bg-tone-teal/20 p-5 rounded-lg border dark:border-tone-teal/50 hover:border-tone-beige transition">
+                class="bg-white border-gray-200 shadow-sm dark:bg-tone-teal/20 p-5 rounded-lg border dark:border-tone-teal/50 hover:border-tone-beige transition text-center xs:text-left">
                 <h3 class="font-semibold text-tone-teal dark:text-tone-beige mb-3">Backend</h3>
                 <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-300">
                     <li>• Flask (Python)</li>
@@ -210,7 +213,7 @@
             </div>
 
             <div
-                class="bg-white border-gray-200 shadow-sm dark:bg-tone-teal/20 p-5 rounded-lg border dark:border-tone-teal/50 hover:border-tone-beige transition">
+                class="bg-white border-gray-200 shadow-sm dark:bg-tone-teal/20 p-5 rounded-lg border dark:border-tone-teal/50 hover:border-tone-beige transition text-center xs:text-left">
                 <h3 class="font-semibold text-tone-teal dark:text-tone-beige mb-3">Frontend</h3>
                 <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-300">
                     <li>• HTML/CSS/JS</li>
@@ -220,20 +223,20 @@
             </div>
 
             <div
-                class="bg-white border-gray-200 shadow-sm dark:bg-tone-teal/20 p-5 rounded-lg border dark:border-tone-teal/50 hover:border-tone-beige transition">
+                class="bg-white border-gray-200 shadow-sm dark:bg-tone-teal/20 p-5 rounded-lg border dark:border-tone-teal/50 hover:border-tone-beige transition text-center xs:text-left">
                 <h3 class="font-semibold text-tone-teal dark:text-tone-beige mb-3">Bases de datos</h3>
                 <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-300">
                     <li>• PostgreSQL</li>
                     <li>• SQLite</li>
-                    <li>• SQL avanzado</li>
+                    <li>• SQL intermedio</li>
                 </ul>
             </div>
 
             <div
-                class="bg-white border-gray-200 shadow-sm dark:bg-tone-teal/20 p-5 rounded-lg border dark:border-tone-teal/50 hover:border-tone-beige transition">
+                class="bg-white border-gray-200 shadow-sm dark:bg-tone-teal/20 p-5 rounded-lg border dark:border-tone-teal/50 hover:border-tone-beige transition text-center xs:text-left">
                 <h3 class="font-semibold text-tone-teal dark:text-tone-beige mb-3">Infraestructura</h3>
                 <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-300">
-                    <li>• Linux (Artix)</li>
+                    <li>• Linux (Ubuntu)</li>
                     <li>• WSL2</li>
                     <li>• Render/Netlify</li>
                     <li>• Git</li>
@@ -245,7 +248,7 @@
 
     <!-- PROYECTOS -->
     <section id="proyectos"
-        class="container mx-auto px-6 py-16 max-w-6xl border-t border-gray-200 dark:border-tone-teal/30">
+        class="container mx-auto px-4 sm:px-6 py-16 max-w-6xl border-t border-gray-200 dark:border-tone-teal/30">
         <h2 class="text-2xl font-bold mb-10 text-tone-dark dark:text-white flex items-center gap-3">
             <span class="w-8 h-1 bg-tone-gold rounded-full"></span>
             Proyectos recientes
@@ -330,14 +333,14 @@
                 <div class="p-6">
                     <h3 class="font-bold text-lg mb-2 text-tone-dark dark:text-white">Password Manager</h3>
                     <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">
-                        CLI tool en Python con sincronización temporal entre dispositivos.
-                        Cifrado AES-256, base de datos SQLite.
+                        CLI tool en Go con sincronización temporal NTP como MFA.
+                        Cifrado AES-256, datos en json cifrado.
                     </p>
                     <div class="flex flex-wrap gap-2 mb-6">
                         <span
-                            class="inline-block bg-tone-teal/10 text-tone-teal border border-tone-teal/20 dark:bg-tone-teal/30 dark:text-tone-beige dark:border-tone-teal/50 text-xs px-2 py-1 rounded">Python</span>
+                            class="inline-block bg-tone-teal/10 text-tone-teal border border-tone-teal/20 dark:bg-tone-teal/30 dark:text-tone-beige dark:border-tone-teal/50 text-xs px-2 py-1 rounded">Go</span>
                         <span
-                            class="inline-block bg-tone-teal/10 text-tone-teal border border-tone-teal/20 dark:bg-tone-teal/30 dark:text-tone-beige dark:border-tone-teal/50 text-xs px-2 py-1 rounded">SQLite</span>
+                            class="inline-block bg-tone-teal/10 text-tone-teal border border-tone-teal/20 dark:bg-tone-teal/30 dark:text-tone-beige dark:border-tone-teal/50 text-xs px-2 py-1 rounded">JSON</span>
                     </div>
                     <div class="flex gap-4">
                         <a href="#"
@@ -428,7 +431,7 @@
                 <div class="p-6">
                     <h3 class="font-bold text-lg mb-2 text-tone-dark dark:text-white">Linux Labs</h3>
                     <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">
-                        Scripts para optimización de Artix, automatización de backups con rsync,
+                        Scripts para optimización de Ubuntu, automatización de backups con rsync,
                         y configuración de entorno de desarrollo.
                     </p>
                     <div class="flex flex-wrap gap-2 mb-6">
@@ -451,7 +454,7 @@
     </section>
 
     <!-- CONTACTO -->
-    <footer class="container mx-auto px-6 py-16 max-w-4xl border-t border-gray-200 dark:border-tone-teal/30">
+    <footer class="container mx-auto px-4 sm:px-6 py-16 max-w-4xl border-t border-gray-200 dark:border-tone-teal/30">
         <h2 class="text-2xl font-bold mb-8 text-tone-dark dark:text-white flex items-center gap-3">
             <span class="w-8 h-1 bg-tone-gold rounded-full"></span>
             Contacto

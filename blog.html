@@ -69,12 +69,33 @@
     </button>
 
     <!-- Cabecera con nav -->
-    <header class="container mx-auto px-6 py-10 max-w-5xl flex items-center justify-between">
-        <h1 class="text-3xl font-bold text-tone-dark dark:text-white">Blog / Proyectos</h1>
-        <nav class="space-x-4">
-            <a href="index.html" class="text-sm text-gray-700 dark:text-gray-300 hover:underline">Inicio</a>
-            <a href="blog.html" class="text-sm text-gray-700 dark:text-gray-300 font-medium hover:underline">Blog</a>
-        </nav>
+    <header class="container mx-auto px-6 pt-24 pb-10 max-w-5xl">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+            <h1 class="text-4xl font-bold text-tone-dark dark:text-white tracking-tight">Blog / Proyectos</h1>
+
+            <!-- Navegación Desktop (Visible en pantallas medianas y grandes) -->
+            <nav class="hidden md:flex gap-6 pb-2">
+                <a href="index.html"
+                    class="text-sm text-gray-600 dark:text-gray-400 hover:text-tone-gold transition-colors hover:underline">
+                    Inicio
+                </a>
+                <a href="blog.html" class="text-sm font-medium text-tone-teal dark:text-tone-beige hover:underline">
+                    Blog
+                </a>
+            </nav>
+
+            <!-- Navegación Mobile estilo pestañas (Visible solo en pantallas pequeñas) -->
+            <nav class="flex md:hidden gap-8 border-b border-gray-200 dark:border-gray-700">
+                <a href="index.html"
+                    class="pb-4 text-sm text-gray-600 dark:text-gray-400 hover:text-tone-gold transition-colors">
+                    Inicio
+                </a>
+                <a href="blog.html"
+                    class="pb-4 text-sm font-medium text-tone-teal dark:text-tone-beige border-b-2 border-tone-gold">
+                    Blog
+                </a>
+            </nav>
+        </div>
     </header>
 
     <main class="container mx-auto px-6 pb-20 max-w-6xl">
