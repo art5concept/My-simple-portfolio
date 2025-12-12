@@ -82,6 +82,12 @@
 <body
     class="bg-gray-50 text-gray-900 dark:bg-tone-dark dark:text-gray-100 selection:bg-tone-gold selection:text-tone-dark transition-colors duration-300">
 
+    <!-- Botón Toggle Idioma (Nuevo) -->
+    <button id="lang-toggle"
+        class="absolute top-6 right-20 z-50 p-2 rounded-full bg-white text-gray-500 hover:bg-gray-100 shadow-lg dark:bg-tone-teal dark:text-gray-200 dark:hover:bg-tone-teal/80 transition-all font-bold text-xs w-10 h-10 flex items-center justify-center">
+        ES
+    </button>
+
     <!-- Botón Toggle Tema -->
     <button id="theme-toggle"
         class="absolute top-6 right-6 z-50 p-2 rounded-full bg-white text-gray-500 hover:bg-gray-100 shadow-lg dark:bg-tone-teal dark:text-gray-200 dark:hover:bg-tone-teal/80 transition-all">
@@ -105,9 +111,10 @@
         <!-- Nuevo: navegación simple con enlace a Blog -->
         <div class="flex justify-end mb-6">
             <nav class="space-x-4">
-                <a href="index.html" class="text-sm text-gray-700 dark:text-gray-300 hover:underline">Inicio</a>
-                <a href="blog.html"
-                    class="text-sm text-gray-700 dark:text-gray-300 font-medium hover:underline">Blog</a>
+                <a href="index.html" class="text-sm text-gray-700 dark:text-gray-300 hover:underline"
+                    data-i18n="nav.home">Inicio</a>
+                <a href="blog.html" class="text-sm text-gray-700 dark:text-gray-300 font-medium hover:underline"
+                    data-i18n="nav.blog">Blog</a>
             </nav>
         </div>
 
@@ -118,27 +125,29 @@
                 <h1 class="text-4xl md:text-6xl font-bold text-tone-dark dark:text-white mb-4 tracking-tight">
                     Félix <span class="text-tone-gold">Lara</span>
                 </h1>
-                <p class="text-xl text-tone-teal dark:text-tone-olive font-medium mb-6">
+                <p class="text-xl text-tone-teal dark:text-tone-olive font-medium mb-6" data-i18n="hero.role"
+                    data-i18n-html="true">
                     <!-- Desarrollador junior en formación <br> Backend & Sistemas Ligeros -->
                     Estudiante de Programación & <br> Ex-Ingeniería Mecánica <br> Enfocado en Backend (Python/Go)
                 </p>
-                <p class="text-gray-600 dark:text-gray-300 max-w-xl mb-8 mx-auto md:mx-0 leading-relaxed">
+                <p class="text-gray-600 dark:text-gray-300 max-w-xl mb-8 mx-auto md:mx-0 leading-relaxed"
+                    data-i18n="hero.description" data-i18n-html="true">
                     Construyo proyectos pequeños pero funcionales. Priorizo simplicidad,
                     mantenibilidad y rendimiento sobre stacks innecesariamente complejos. <br>
                     Busco mi primera oportunidad profesional para aplicar mi capacidad lógica y seguir aprendiendo.
                 </p>
                 <div class="flex flex-wrap justify-center md:justify-start gap-4">
-                    <a href="mailto:felix@tudominio.com"
+                    <a href="mailto:larafelix2197@gmail.com"
                         class="inline-flex items-center gap-2 bg-tone-gold text-tone-dark font-bold px-5 sm:px-6 py-3 rounded-lg hover:bg-yellow-500 transition shadow-lg shadow-yellow-900/20">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                         </svg>
-                        Contáctame
+                        <span data-i18n="hero.contact_btn">Contáctame</span>
                     </a>
                     <a href="#proyectos"
                         class="inline-flex items-center gap-2 bg-transparent border border-tone-teal text-tone-teal hover:bg-tone-teal/10 dark:border-tone-beige dark:text-tone-beige px-5 sm:px-6 py-3 rounded-lg dark:hover:bg-tone-teal/30 transition">
-                        Ver proyectos
+                        <span data-i18n="hero.projects_btn">Ver proyectos</span>
                     </a>
                 </div>
             </div>
@@ -161,11 +170,11 @@
     <section class="container mx-auto px-4 sm:px-6 py-16 max-w-5xl border-t border-gray-200 dark:border-tone-teal/30">
         <h2 class="text-2xl font-bold mb-8 text-tone-dark dark:text-white flex items-center gap-3">
             <span class="w-8 h-1 bg-tone-gold rounded-full"></span>
-            Sobre mí
+            <span data-i18n="about.title">Sobre mí</span>
         </h2>
         <div class="grid md:grid-cols-2 gap-10">
             <div class="text-gray-700 dark:text-gray-300 space-y-4">
-                <p>
+                <p data-i18n="about.p1" data-i18n-html="true">
                     Actualmente estudio <b>Técnico en Programación Empresarial</b> y complemento mi formación con
                     <span class="text-tone-gold font-medium">aprendizaje autodidacta</span>.<br>
                     Mi paso por Ingeniería Mecánica fortaleció mi pensamiento
@@ -173,7 +182,7 @@
                     resolución de problemas.
                 </p>
 
-                <p>
+                <p data-i18n="about.p2" data-i18n-html="true">
                     Tengo experiencia trabajando con <span class="text-tone-gold font-medium">Flask</span> (Python) y
                     <span class="text-tone-gold font-medium">Go</span>, desarrollando
                     <span class="text-tone-gold font-medium">sistemas ligeros y modulares</span>. <br> En
@@ -185,9 +194,9 @@
             </div>
             <div class="code-bg rounded-lg p-6 shadow-inner">
                 <code class="text-sm font-mono block text-gray-100">
-                    <span class="text-gray-400"># Mi filosofía de código</span><br>
-                    <span class="text-purple-400">if</span> funcionando <span class="text-purple-400">and</span> simple:<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-gray-400"># Todo bien</span><br>
+                    <span class="text-gray-400" data-i18n="about.code_comment_1"># Mi filosofía de código</span><br>
+                    <span class="text-purple-400">if</span> <span data-i18n="about.code_condition_1">funcionando</span> <span class="text-purple-400">and</span> <span data-i18n="about.code_condition_2">simple</span>:<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-gray-400" data-i18n="about.code_comment_2"># Todo bien</span><br>
                     &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-tone-gold">pass</span>
                 </code>
             </div>
@@ -198,13 +207,14 @@
     <section class="container mx-auto px-4 sm:px-6 py-16 max-w-6xl border-t border-gray-200 dark:border-tone-teal/30">
         <h2 class="text-2xl font-bold mb-10 text-tone-dark dark:text-white flex items-center gap-3">
             <span class="w-8 h-1 bg-tone-gold rounded-full"></span>
-            Tecnologías que uso
+            <span data-i18n="skills.title">Tecnologías que uso</span>
         </h2>
         <div class="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-4 gap-6">
 
             <div
                 class="bg-white border-gray-200 shadow-sm dark:bg-tone-teal/20 p-5 rounded-lg border dark:border-tone-teal/50 hover:border-tone-beige transition text-center xs:text-left">
-                <h3 class="font-semibold text-tone-teal dark:text-tone-beige mb-3">Backend</h3>
+                <h3 class="font-semibold text-tone-teal dark:text-tone-beige mb-3" data-i18n="skills.backend">Backend
+                </h3>
                 <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-300">
                     <li>• Flask (Python)</li>
                     <li>• Go</li>
@@ -214,7 +224,8 @@
 
             <div
                 class="bg-white border-gray-200 shadow-sm dark:bg-tone-teal/20 p-5 rounded-lg border dark:border-tone-teal/50 hover:border-tone-beige transition text-center xs:text-left">
-                <h3 class="font-semibold text-tone-teal dark:text-tone-beige mb-3">Frontend</h3>
+                <h3 class="font-semibold text-tone-teal dark:text-tone-beige mb-3" data-i18n="skills.frontend">Frontend
+                </h3>
                 <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-300">
                     <li>• HTML/CSS/JS</li>
                     <li>• TailwindCSS</li>
@@ -224,7 +235,8 @@
 
             <div
                 class="bg-white border-gray-200 shadow-sm dark:bg-tone-teal/20 p-5 rounded-lg border dark:border-tone-teal/50 hover:border-tone-beige transition text-center xs:text-left">
-                <h3 class="font-semibold text-tone-teal dark:text-tone-beige mb-3">Bases de datos</h3>
+                <h3 class="font-semibold text-tone-teal dark:text-tone-beige mb-3" data-i18n="skills.db">Bases de datos
+                </h3>
                 <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-300">
                     <li>• PostgreSQL</li>
                     <li>• SQLite</li>
@@ -234,7 +246,8 @@
 
             <div
                 class="bg-white border-gray-200 shadow-sm dark:bg-tone-teal/20 p-5 rounded-lg border dark:border-tone-teal/50 hover:border-tone-beige transition text-center xs:text-left">
-                <h3 class="font-semibold text-tone-teal dark:text-tone-beige mb-3">Infraestructura</h3>
+                <h3 class="font-semibold text-tone-teal dark:text-tone-beige mb-3" data-i18n="skills.infra">
+                    Infraestructura</h3>
                 <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-300">
                     <li>• Linux (Ubuntu)</li>
                     <li>• WSL2</li>
@@ -251,42 +264,13 @@
         class="container mx-auto px-4 sm:px-6 py-16 max-w-6xl border-t border-gray-200 dark:border-tone-teal/30">
         <h2 class="text-2xl font-bold mb-10 text-tone-dark dark:text-white flex items-center gap-3">
             <span class="w-8 h-1 bg-tone-gold rounded-full"></span>
-            Proyectos recientes
+            <span data-i18n="projects.title">Proyectos recientes</span>
         </h2>
 
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
 
             <!-- Proyecto 1 -->
-            <div
-                class="project-card bg-white border-gray-200 shadow-sm dark:bg-tone-teal/10 rounded-xl border dark:border-tone-teal/40 overflow-hidden group">
-                <div
-                    class="h-48 bg-gradient-to-br from-tone-teal to-gray-900 flex items-center justify-center group-hover:scale-105 transition duration-500">
-                    <svg class="w-16 h-16 text-tone-beige" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                    </svg>
-                </div>
-                <div class="p-6">
-                    <h3 class="font-bold text-lg mb-2 text-tone-dark dark:text-white">Simulador Financiero</h3>
-                    <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">
-                        Juego por turnos para aprender gestión de presupuestos. Lógica completa en Python,
-                        frontend minimalista con Flask y vanilla JS.
-                    </p>
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span
-                            class="inline-block bg-tone-teal/10 text-tone-teal border border-tone-teal/20 dark:bg-tone-teal/30 dark:text-tone-beige dark:border-tone-teal/50 text-xs px-2 py-1 rounded">Flask</span>
-                        <span
-                            class="inline-block bg-tone-teal/10 text-tone-teal border border-tone-teal/20 dark:bg-tone-teal/30 dark:text-tone-beige dark:border-tone-teal/50 text-xs px-2 py-1 rounded">Python</span>
-                    </div>
-                    <div class="flex gap-4">
-                        <a href="#"
-                            class="text-sm text-tone-gold hover:text-tone-dark dark:hover:text-white font-medium transition">Demo
-                            →</a>
-                        <a href="#"
-                            class="text-sm text-gray-500 hover:text-tone-dark dark:text-gray-400 dark:hover:text-white font-medium transition">Código</a>
-                    </div>
-                </div>
-            </div>
+
 
             <!-- Proyecto 2 -->
             <div
@@ -299,10 +283,11 @@
                     </svg>
                 </div>
                 <div class="p-6">
-                    <h3 class="font-bold text-lg mb-2 text-tone-dark dark:text-white">Acortador de URLs</h3>
-                    <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">
+                    <h3 class="font-bold text-lg mb-2 text-tone-dark dark:text-white" data-i18n="projects.p1_title">
+                        Acortador de URLs (Pocolink) </h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm mb-4" data-i18n="projects.p1_desc">
                         Servicio ligero en Go con enfoque en accesibilidad WCAG AAA. Backend simple,
-                        frontend sin JavaScript, deploy en Render.
+                        frontend con JavaScript y deploy en Render.
                     </p>
                     <div class="flex flex-wrap gap-2 mb-6">
                         <span
@@ -312,10 +297,12 @@
                     </div>
                     <div class="flex gap-4">
                         <a href="#"
-                            class="text-sm text-tone-gold hover:text-tone-dark dark:hover:text-white font-medium transition">Demo
+                            class="text-sm text-tone-gold hover:text-tone-dark dark:hover:text-white font-medium transition"
+                            data-i18n="projects.p1_demo">Demo
                             →</a>
-                        <a href="#"
-                            class="text-sm text-gray-500 hover:text-tone-dark dark:text-gray-400 dark:hover:text-white font-medium transition">Código</a>
+                        <a href="https://github.com/art5concept/pocolink_bkup"
+                            class="text-sm text-gray-500 hover:text-tone-dark dark:text-gray-400 dark:hover:text-white font-medium transition"
+                            data-i18n="projects.p1_code">Código</a>
                     </div>
                 </div>
             </div>
@@ -331,9 +318,10 @@
                     </svg>
                 </div>
                 <div class="p-6">
-                    <h3 class="font-bold text-lg mb-2 text-tone-dark dark:text-white">Password Manager</h3>
-                    <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">
-                        CLI tool en Go con sincronización temporal NTP como MFA.
+                    <h3 class="font-bold text-lg mb-2 text-tone-dark dark:text-white" data-i18n="projects.p2_title">
+                        Password Manager (Clixxkey)</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm mb-4" data-i18n="projects.p2_desc">
+                        CLI tool en Go con sincronización por NTP como MFA.
                         Cifrado AES-256, datos en json cifrado.
                     </p>
                     <div class="flex flex-wrap gap-2 mb-6">
@@ -343,46 +331,19 @@
                             class="inline-block bg-tone-teal/10 text-tone-teal border border-tone-teal/20 dark:bg-tone-teal/30 dark:text-tone-beige dark:border-tone-teal/50 text-xs px-2 py-1 rounded">JSON</span>
                     </div>
                     <div class="flex gap-4">
-                        <a href="#"
-                            class="text-sm text-tone-gold hover:text-tone-dark dark:hover:text-white font-medium transition">Demo
-                            →</a>
-                        <a href="#"
-                            class="text-sm text-gray-500 hover:text-tone-dark dark:text-gray-400 dark:hover:text-white font-medium transition">Código</a>
+                        <a href="https://www.youtube.com/watch?v=v8uiq69IVAU"
+                            class="text-sm text-tone-gold hover:text-tone-dark dark:hover:text-white font-medium transition"
+                            data-i18n="projects.p2_demo">Demo
+                            Video →</a>
+                        <a href="https://github.com/art5concept/clixxkey"
+                            class="text-sm text-gray-500 hover:text-tone-dark dark:text-gray-400 dark:hover:text-white font-medium transition"
+                            data-i18n="projects.p2_code">Código</a>
                     </div>
                 </div>
             </div>
 
             <!-- Proyecto 4 -->
-            <div
-                class="project-card bg-white border-gray-200 shadow-sm dark:bg-tone-teal/10 rounded-xl border dark:border-tone-teal/40 overflow-hidden group">
-                <div
-                    class="h-48 bg-gradient-to-br from-tone-teal to-gray-900 flex items-center justify-center group-hover:scale-105 transition duration-500">
-                    <svg class="w-16 h-16 text-tone-beige" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                            d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                    </svg>
-                </div>
-                <div class="p-6">
-                    <h3 class="font-bold text-lg mb-2 text-tone-dark dark:text-white">Control Parental</h3>
-                    <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">
-                        Script en Python para OpenWRT que filtra contenido y limita tiempos de conexión.
-                        Configurable vía archivo JSON.
-                    </p>
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span
-                            class="inline-block bg-tone-teal/10 text-tone-teal border border-tone-teal/20 dark:bg-tone-teal/30 dark:text-tone-beige dark:border-tone-teal/50 text-xs px-2 py-1 rounded">Python</span>
-                        <span
-                            class="inline-block bg-tone-teal/10 text-tone-teal border border-tone-teal/20 dark:bg-tone-teal/30 dark:text-tone-beige dark:border-tone-teal/50 text-xs px-2 py-1 rounded">OpenWRT</span>
-                    </div>
-                    <div class="flex gap-4">
-                        <a href="#"
-                            class="text-sm text-tone-gold hover:text-tone-dark dark:hover:text-white font-medium transition">Docs
-                            →</a>
-                        <a href="#"
-                            class="text-sm text-gray-500 hover:text-tone-dark dark:text-gray-400 dark:hover:text-white font-medium transition">Código</a>
-                    </div>
-                </div>
-            </div>
+
 
             <!-- Proyecto 5 -->
             <div
@@ -395,23 +356,24 @@
                     </svg>
                 </div>
                 <div class="p-6">
-                    <h3 class="font-bold text-lg mb-2 text-tone-dark dark:text-white">Análisis Musical</h3>
-                    <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">
+                    <h3 class="font-bold text-lg mb-2 text-tone-dark dark:text-white" data-i18n="projects.p3_title">
+                        Análisis Musical</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm mb-4" data-i18n="projects.p3_desc">
                         Consultas SQL avanzadas sobre dataset de Spotify para identificar patrones
                         narrativos en discografías.
                     </p>
                     <div class="flex flex-wrap gap-2 mb-6">
                         <span
                             class="inline-block bg-tone-teal/10 text-tone-teal border border-tone-teal/20 dark:bg-tone-teal/30 dark:text-tone-beige dark:border-tone-teal/50 text-xs px-2 py-1 rounded">SQL</span>
-                        <span
-                            class="inline-block bg-tone-teal/10 text-tone-teal border border-tone-teal/20 dark:bg-tone-teal/30 dark:text-tone-beige dark:border-tone-teal/50 text-xs px-2 py-1 rounded">Jupyter</span>
                     </div>
                     <div class="flex gap-4">
                         <a href="#"
-                            class="text-sm text-tone-gold hover:text-tone-dark dark:hover:text-white font-medium transition">Notebook
+                            class="text-sm text-tone-gold hover:text-tone-dark dark:hover:text-white font-medium transition"
+                            data-i18n="projects.p3_demo">Notebook
                             →</a>
                         <a href="#"
-                            class="text-sm text-gray-500 hover:text-tone-dark dark:text-gray-400 dark:hover:text-white font-medium transition">Dataset</a>
+                            class="text-sm text-gray-500 hover:text-tone-dark dark:text-gray-400 dark:hover:text-white font-medium transition"
+                            data-i18n="projects.p3_dataset">Dataset</a>
                     </div>
                 </div>
             </div>
@@ -429,10 +391,11 @@
                     </svg>
                 </div>
                 <div class="p-6">
-                    <h3 class="font-bold text-lg mb-2 text-tone-dark dark:text-white">Linux Labs</h3>
-                    <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">
-                        Scripts para optimización de Ubuntu, automatización de backups con rsync,
-                        y configuración de entorno de desarrollo.
+                    <h3 class="font-bold text-lg mb-2 text-tone-dark dark:text-white" data-i18n="projects.p4_title">
+                        Linux Labs</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm mb-4" data-i18n="projects.p4_desc">
+                        Scripts para optimización de Ubuntu, automatización de backups con rsync, optimización de
+                        recursos y configuración de entorno de desarrollo.
                     </p>
                     <div class="flex flex-wrap gap-2 mb-6">
                         <span
@@ -442,10 +405,12 @@
                     </div>
                     <div class="flex gap-4">
                         <a href="#"
-                            class="text-sm text-tone-gold hover:text-tone-dark dark:hover:text-white font-medium transition">Dotfiles
+                            class="text-sm text-tone-gold hover:text-tone-dark dark:hover:text-white font-medium transition"
+                            data-i18n="projects.p4_dotfiles">Dotfiles
                             →</a>
                         <a href="#"
-                            class="text-sm text-gray-500 hover:text-tone-dark dark:text-gray-400 dark:hover:text-white font-medium transition">Scripts</a>
+                            class="text-sm text-gray-500 hover:text-tone-dark dark:text-gray-400 dark:hover:text-white font-medium transition"
+                            data-i18n="projects.p4_scripts">Scripts</a>
                     </div>
                 </div>
             </div>
@@ -457,11 +422,11 @@
     <footer class="container mx-auto px-4 sm:px-6 py-16 max-w-4xl border-t border-gray-200 dark:border-tone-teal/30">
         <h2 class="text-2xl font-bold mb-8 text-tone-dark dark:text-white flex items-center gap-3">
             <span class="w-8 h-1 bg-tone-gold rounded-full"></span>
-            Contacto
+            <span data-i18n="contact.title">Contacto</span>
         </h2>
         <div class="grid md:grid-cols-2 gap-10">
             <div>
-                <p class="text-gray-600 dark:text-gray-300 mb-6">
+                <p class="text-gray-600 dark:text-gray-300 mb-6" data-i18n="contact.text" data-i18n-html="true">
                     <b>Abierto a nuevas oportunidades</b> de freelance, prácticas y colaboraciones en proyectos que
                     valoren la <span class="text-tone-gold font-medium">simplicidad</span> y el
                     <span class="text-tone-gold font-medium">pensamiento crítico</span>.
@@ -474,24 +439,24 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                         </svg>
-                        Panamá
+                        <span data-i18n="contact.location">Panamá</span>
                     </p>
                     <p class="flex items-center gap-3">
                         <svg class="w-5 h-5 text-tone-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M5 12h14m-7-7l7 7-7 7" />
                         </svg>
-                        Primeros pasos en el mercado laboral
+                        <span data-i18n="contact.status">Primeros pasos en el mercado laboral</span>
                     </p>
                 </div>
             </div>
             <div class="space-y-4">
 
-                <a href="mailto:felix@tudominio.com"
+                <a href="mailto:larafelix2197@gmail.com"
                     class="block bg-white border-gray-200 dark:bg-tone-teal/20 border dark:border-tone-teal/50 px-5 py-4 rounded-lg hover:border-tone-gold dark:hover:bg-tone-teal/40 dark:hover:border-tone-beige transition group">
                     <div
                         class="flex items-center justify-between text-gray-700 group-hover:text-tone-dark dark:text-gray-200 dark:group-hover:text-white">
-                        <span>Enviar mensaje</span>
+                        <span data-i18n="contact.btn_email">Enviar mensaje</span>
                         <svg class="w-5 h-5 text-tone-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -503,7 +468,7 @@
                     class="block bg-white border-gray-200 dark:bg-tone-teal/20 border dark:border-tone-teal/50 px-5 py-4 rounded-lg hover:border-tone-gold dark:hover:bg-tone-teal/40 dark:hover:border-tone-beige transition group">
                     <div
                         class="flex items-center justify-between text-gray-700 group-hover:text-tone-dark dark:text-gray-200 dark:group-hover:text-white">
-                        <span>GitHub</span>
+                        <span data-i18n="contact.btn_github">GitHub</span>
                         <svg class="w-5 h-5 text-tone-gold" fill="currentColor" viewBox="0 0 24 24">
                             <path fill-rule="evenodd"
                                 d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
@@ -515,16 +480,34 @@
                     class="block bg-white border-gray-200 dark:bg-tone-teal/20 border dark:border-tone-teal/50 px-5 py-4 rounded-lg hover:border-tone-gold dark:hover:bg-tone-teal/40 dark:hover:border-tone-beige transition group">
                     <div
                         class="flex items-center justify-between text-gray-700 group-hover:text-tone-dark dark:text-gray-200 dark:group-hover:text-white">
-                        <span>LinkedIn</span>
+                        <span data-i18n="contact.btn_linkedin">LinkedIn</span>
                         <svg class="w-5 h-5 text-tone-gold" fill="currentColor" viewBox="0 0 24 24">
                             <path
                                 d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
                         </svg>
                     </div>
                 </a>
+                <a href="https://wa.me/50764530015?text=¡Hola!%20Quiero%20conocerte%20mejor."
+                    class="block bg-white border-gray-200 dark:bg-tone-teal/20 border dark:border-tone-teal/50 px-5 py-4 rounded-lg hover:border-tone-gold dark:hover:bg-tone-teal/40 dark:hover:border-tone-beige transition group">
+                    <div
+                        class="flex items-center justify-between text-gray-700 group-hover:text-tone-dark dark:text-gray-200 dark:group-hover:text-white">
+                        <span data-i18n="contact.btn_whatsapp">WhatsApp</span>
+                        <svg class="w-5 h-5 text-tone-gold" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z" />
+                        </svg>
+                    </div>
+                </a>
             </div>
         </div>
     </footer>
+
+    <!-- i18next Scripts -->
+    <script src="https://unpkg.com/i18next@23.7.11/i18next.min.js"></script>
+    <script
+        src="https://unpkg.com/i18next-browser-languagedetector@7.2.0/i18nextBrowserLanguageDetector.min.js"></script>
+    <script src="js/translations.js"></script>
+    <script src="js/i18n.js"></script>
 
     <!-- Script para funcionalidad del botón -->
     <script>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Proyecto Arduino: Sensor de distancia HC-SR04 con alerta sonora.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        tone: {
+                            dark: '#011F26',
+                            teal: '#025E73',
+                            olive: '#A5A692',
+                            beige: '#BFB78F',
+                            gold: '#F2A71B',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Arduino: Sensor de Distancia — Félix Lara</title>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .code-bg {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid #025E73;
+        }
+
+        html:not(.dark) .code-bg {
+            background: #1f2937;
+            border-color: #e5e7eb;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-900 dark:bg-tone-dark dark:text-gray-100 transition-colors duration-300">
+
+    <!-- Botón Toggle Idioma (Nuevo) -->
+    <button id="lang-toggle"
+        class="absolute top-6 right-20 z-50 p-2 rounded-full bg-white text-gray-500 hover:bg-gray-100 shadow-lg dark:bg-tone-teal dark:text-gray-200 dark:hover:bg-tone-teal/80 transition-all font-bold text-xs w-10 h-10 flex items-center justify-center">
+        ES
+    </button>
+
+    <!-- Toggle tema (Absolute como en index) -->
+    <button id="theme-toggle"
+        class="absolute top-6 right-6 z-50 p-2 rounded-full bg-white text-gray-500 hover:bg-gray-100 shadow-lg dark:bg-tone-teal dark:text-gray-200 transition-all">
+        <svg id="theme-toggle-light-icon" class="w-6 h-6 hidden dark:block" fill="none" stroke="currentColor"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
+            </path>
+        </svg>
+        <svg id="theme-toggle-dark-icon" class="w-6 h-6 block dark:hidden" fill="none" stroke="currentColor"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+        </svg>
+    </button>
+
+    <header class="container mx-auto px-6 pt-10 pb-10 max-w-3xl">
+        <nav class="mb-8">
+            <a href="blog.html" class="text-tone-gold hover:underline font-medium inline-flex items-center gap-1">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+                <span data-i18n="sensor_page.footer_back">Volver al blog</span>
+            </a>
+        </nav>
+        <h1 class="text-3xl md:text-4xl font-bold text-tone-dark dark:text-white mb-4 tracking-tight"
+            data-i18n="sensor_page.title">Arduino: Sensor de
+            distancia con alerta</h1>
+        <div
+            class="flex gap-4 text-sm text-gray-500 dark:text-gray-400 border-b border-gray-200 dark:border-gray-700 pb-6">
+            <span data-i18n="sensor_page.breadcrumbs.hw">Hardware</span>
+            <span>•</span>
+            <span data-i18n="sensor_page.breadcrumbs.cpp">C++</span>
+            <span>•</span>
+            <span data-i18n="sensor_page.breadcrumbs.level">Principiante</span>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 pb-20 max-w-3xl text-gray-800 dark:text-gray-300 leading-relaxed space-y-8">
+
+        <section>
+            <p class="text-lg" data-i18n="sensor_page.intro" data-i18n-html="true">
+                En este proyecto construí un sistema simple de detección de proximidad. Utilizando un sensor
+                ultrasónico
+                <span class="font-semibold text-tone-teal dark:text-tone-beige">HC-SR04</span>, medimos la distancia a
+                un objeto y usamos un buzzer para emitir una alerta sonora que se intensifica cuanto más cerca está el
+                objeto, similar al sensor de reversa de un automóvil.
+            </p>
+        </section>
+
+        <section>
+            <h2 class="text-2xl font-bold text-tone-dark dark:text-white mb-4" data-i18n="sensor_page.materials.title">
+                Materiales necesarios</h2>
+            <ul class="list-disc list-inside space-y-2 ml-2">
+                <li data-i18n="sensor_page.materials.item1">Placa Arduino Uno (o compatible)</li>
+                <li data-i18n="sensor_page.materials.item2">Sensor ultrasónico HC-SR04</li>
+                <li data-i18n="sensor_page.materials.item3">Led</li>
+                <li data-i18n="sensor_page.materials.item4">Protoboard y cables jumper</li>
+                <li data-i18n="sensor_page.materials.item5">Resistencia de 220Ω (opcional, para proteger el led)</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2 class="text-2xl font-bold text-tone-dark dark:text-white mb-4" data-i18n="sensor_page.code.title">El
+                Código</h2>
+            <p class="mb-4" data-i18n="sensor_page.code.desc">
+                La lógica es sencilla: enviamos un pulso ultrasónico, medimos cuánto tarda en volver (eco) y calculamos
+                la distancia. Si la distancia es menor a 30cm, activamos el buzzer.
+            </p>
+            <div class="code-bg p-6 rounded-lg overflow-x-auto shadow-inner">
+                <pre><code class="text-sm font-mono text-gray-100">
+// Definición de pines
+const int trigPin = 9;
+const int echoPin = 10;
+const int buzzerPin = 11;
+
+void setup() {
+  pinMode(trigPin, OUTPUT); // El trigger envía el pulso
+  pinMode(echoPin, INPUT);  // El echo recibe el rebote
+  pinMode(buzzerPin, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  // 1. Limpiar el pin del trigger
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  
+  // 2. Enviar pulso de 10 microsegundos
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+  
+  // 3. Leer el tiempo del eco
+  long duration = pulseIn(echoPin, HIGH);
+  
+  // 4. Calcular distancia (velocidad sonido = 0.034 cm/us)
+  int distance = duration * 0.034 / 2;
+  
+  // 5. Lógica de alerta
+  if (distance < 30 && distance > 0) {
+    // Mapear distancia a frecuencia: más cerca = tono más agudo
+    int toneFreq = map(distance, 0, 30, 1000, 200);
+    tone(buzzerPin, toneFreq);
+    
+    // Opcional: imprimir en monitor serial
+    Serial.print("Alerta! Distancia: ");
+    Serial.println(distance);
+  } else {
+    noTone(buzzerPin);
+  }
+  
+  delay(100); // Pequeña pausa para estabilidad
+}
+</code></pre>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-2xl font-bold text-tone-dark dark:text-white mb-4" data-i18n="sensor_page.tech.title">
+                Explicación técnica</h2>
+            <p data-i18n="sensor_page.tech.p1" data-i18n-html="true">
+                El sensor HC-SR04 funciona como un sonar. Emite un sonido inaudible para el oído humano (ultrasonido).
+                La función <code>pulseIn()</code> de Arduino mide el tiempo en microsegundos que el pin
+                <code>echoPin</code> permanece en estado ALTO, lo que corresponde al tiempo de vuelo de la onda sonora.
+            </p>
+            <p class="mt-4" data-i18n="sensor_page.tech.p2" data-i18n-html="true">
+                Dividimos por 2 porque el sonido viaja de ida y vuelta. La constante <code>0.034</code> es la velocidad
+                del sonido en cm/µs.
+            </p>
+        </section>
+
+    </main>
+
+    <footer
+        class="container mx-auto px-6 pb-12 max-w-3xl text-sm text-gray-600 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700 pt-8">
+        <p>Félix Lara — <a href="blog.html" class="hover:text-tone-gold hover:underline"
+                data-i18n="sensor_page.footer_back">Volver al listado</a></p>
+    </footer>
+
+    <!-- i18next Scripts -->
+    <script src="https://unpkg.com/i18next@23.7.11/i18next.min.js"></script>
+    <script
+        src="https://unpkg.com/i18next-browser-languagedetector@7.2.0/i18nextBrowserLanguageDetector.min.js"></script>
+    <script src="js/translations.js"></script>
+    <script src="js/i18n.js"></script>
+
+    <script>
+        // Script del toggle (copiado de index/blog)
+        var themeToggleBtn = document.getElementById('theme-toggle');
+        var darkIcon = document.getElementById('theme-toggle-dark-icon');
+        var lightIcon = document.getElementById('theme-toggle-light-icon');
+
+        themeToggleBtn.addEventListener('click', function () {
+            darkIcon.classList.toggle('hidden');
+            lightIcon.classList.toggle('hidden');
+
+            if (localStorage.getItem('theme')) {
+                if (localStorage.getItem('theme') === 'light') {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                }
+            } else {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

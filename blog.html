@@ -52,9 +52,15 @@
 
 <body class="bg-gray-50 text-gray-900 dark:bg-tone-dark dark:text-gray-100 transition-colors duration-300">
 
-    <!-- Toggle tema (misma lógica visual que index) -->
+    <!-- Botón Toggle Idioma (Nuevo) -->
+    <button id="lang-toggle"
+        class="absolute top-6 right-20 z-50 p-2 rounded-full bg-white text-gray-500 hover:bg-gray-100 shadow-lg dark:bg-tone-teal dark:text-gray-200 dark:hover:bg-tone-teal/80 transition-all font-bold text-xs w-10 h-10 flex items-center justify-center">
+        ES
+    </button>
+
+    <!-- Toggle tema (Cambiado a absolute para consistencia) -->
     <button id="theme-toggle"
-        class="fixed top-6 right-6 z-50 p-2 rounded-full bg-white text-gray-500 hover:bg-gray-100 shadow-lg dark:bg-tone-teal dark:text-gray-200 transition-all">
+        class="absolute top-6 right-6 z-50 p-2 rounded-full bg-white text-gray-500 hover:bg-gray-100 shadow-lg dark:bg-tone-teal dark:text-gray-200 transition-all">
         <svg id="theme-toggle-light-icon" class="w-6 h-6 hidden dark:block" fill="none" stroke="currentColor"
             viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -71,15 +77,18 @@
     <!-- Cabecera con nav -->
     <header class="container mx-auto px-6 pt-24 pb-10 max-w-5xl">
         <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-            <h1 class="text-4xl font-bold text-tone-dark dark:text-white tracking-tight">Blog / Proyectos</h1>
+            <h1 class="text-4xl font-bold text-tone-dark dark:text-white tracking-tight" data-i18n="blog_page.title">
+                Blog / Proyectos</h1>
 
             <!-- Navegación Desktop (Visible en pantallas medianas y grandes) -->
             <nav class="hidden md:flex gap-6 pb-2">
                 <a href="index.html"
-                    class="text-sm text-gray-600 dark:text-gray-400 hover:text-tone-gold transition-colors hover:underline">
+                    class="text-sm text-gray-600 dark:text-gray-400 hover:text-tone-gold transition-colors hover:underline"
+                    data-i18n="nav.home">
                     Inicio
                 </a>
-                <a href="blog.html" class="text-sm font-medium text-tone-teal dark:text-tone-beige hover:underline">
+                <a href="blog.html" class="text-sm font-medium text-tone-teal dark:text-tone-beige hover:underline"
+                    data-i18n="nav.blog">
                     Blog
                 </a>
             </nav>
@@ -87,11 +96,13 @@
             <!-- Navegación Mobile estilo pestañas (Visible solo en pantallas pequeñas) -->
             <nav class="flex md:hidden gap-8 border-b border-gray-200 dark:border-gray-700">
                 <a href="index.html"
-                    class="pb-4 text-sm text-gray-600 dark:text-gray-400 hover:text-tone-gold transition-colors">
+                    class="pb-4 text-sm text-gray-600 dark:text-gray-400 hover:text-tone-gold transition-colors"
+                    data-i18n="nav.home">
                     Inicio
                 </a>
                 <a href="blog.html"
-                    class="pb-4 text-sm font-medium text-tone-teal dark:text-tone-beige border-b-2 border-tone-gold">
+                    class="pb-4 text-sm font-medium text-tone-teal dark:text-tone-beige border-b-2 border-tone-gold"
+                    data-i18n="nav.blog">
                     Blog
                 </a>
             </nav>
@@ -99,33 +110,58 @@
     </header>
 
     <main class="container mx-auto px-6 pb-20 max-w-6xl">
-        <p class="text-gray-700 dark:text-gray-300 mb-6">Aquí puedes listar proyectos personales, guías y experimentos
+        <p class="text-gray-700 dark:text-gray-300 mb-6" data-i18n="blog_page.intro">Aquí puedes listar proyectos
+            personales, guías y experimentos
             (Arduino, hardware, scripts, etc.).</p>
 
         <div class="grid md:grid-cols-2 gap-6">
             <!-- Ejemplo entrada 1 -->
             <article
                 class="bg-white dark:bg-tone-teal/10 border border-gray-200 dark:border-tone-teal/40 rounded-lg p-6 shadow-sm">
-                <h2 class="text-xl font-semibold text-tone-dark dark:text-white mb-2">Arduino: Sensor de distancia con
+                <h2 class="text-xl font-semibold text-tone-dark dark:text-white mb-2" data-i18n="blog_page.art1_title">
+                    Arduino: Sensor de distancia con
                     alerta</h2>
-                <p class="text-gray-600 dark:text-gray-400 mb-4 text-sm">Proyecto de ejemplo con HC-SR04 + buzzer.
+                <p class="text-gray-600 dark:text-gray-400 mb-4 text-sm" data-i18n="blog_page.art1_desc">Proyecto de
+                    ejemplo con HC-SR04 + buzzer.
                     Código, circuito y explicación.</p>
                 <div class="flex gap-3">
-                    <a href="#" class="text-sm text-tone-gold hover:underline">Leer →</a>
-                    <a href="#" class="text-sm text-gray-500 hover:underline">Código (GitHub)</a>
+                    <a href="arduino-sensor.html" class="text-sm text-tone-gold hover:underline"
+                        data-i18n="blog_page.read_more">Leer →</a>
+                    <a href="#" class="text-sm text-gray-500 hover:underline" data-i18n="blog_page.code_github">Código
+                        (GitHub)</a>
+                </div>
+            </article>
+
+            <!-- Nueva entrada: Boost con Kalman -->
+            <article
+                class="bg-white dark:bg-tone-teal/10 border border-gray-200 dark:border-tone-teal/40 rounded-lg p-6 shadow-sm">
+                <h2 class="text-xl font-semibold text-tone-dark dark:text-white mb-2" data-i18n="blog_page.art2_title">
+                    Arduino: Boost con Filtro Kalman
+                </h2>
+                <p class="text-gray-600 dark:text-gray-400 mb-4 text-sm" data-i18n="blog_page.art2_desc">Sistema
+                    optimizado de detección con doble
+                    sensor HC-SR04 y filtro Kalman para estabilidad en Arduino Uno.</p>
+                <div class="flex gap-3">
+                    <a href="arduino-boost.html" class="text-sm text-tone-gold hover:underline"
+                        data-i18n="blog_page.read_more">Leer →</a>
+                    <a href="https://github.com/art5concept/KalmanFilter-1D-Boost"
+                        class="text-sm text-gray-500 hover:underline" data-i18n="blog_page.code">Código</a>
                 </div>
             </article>
 
             <!-- Ejemplo entrada 2 -->
             <article
                 class="bg-white dark:bg-tone-teal/10 border border-gray-200 dark:border-tone-teal/40 rounded-lg p-6 shadow-sm">
-                <h2 class="text-xl font-semibold text-tone-dark dark:text-white mb-2">Automatización backups con rsync
+                <h2 class="text-xl font-semibold text-tone-dark dark:text-white mb-2" data-i18n="blog_page.art3_title">
+                    Automatización backups con rsync
                 </h2>
-                <p class="text-gray-600 dark:text-gray-400 mb-4 text-sm">Script y explicación para backups incrementales
+                <p class="text-gray-600 dark:text-gray-400 mb-4 text-sm" data-i18n="blog_page.art3_desc">Script y
+                    explicación para backups incrementales
                     en Linux (rsync + systemd timer).</p>
                 <div class="flex gap-3">
-                    <a href="#" class="text-sm text-tone-gold hover:underline">Leer →</a>
-                    <a href="#" class="text-sm text-gray-500 hover:underline">Scripts</a>
+                    <a href="#" class="text-sm text-tone-gold hover:underline" data-i18n="blog_page.read_more">Leer
+                        →</a>
+                    <a href="#" class="text-sm text-gray-500 hover:underline" data-i18n="blog_page.scripts">Scripts</a>
                 </div>
             </article>
 
@@ -134,8 +170,15 @@
     </main>
 
     <footer class="container mx-auto px-6 pb-12 max-w-5xl text-sm text-gray-600 dark:text-gray-400">
-        <p>Félix Lara — Proyectos personales</p>
+        <p data-i18n="blog_page.footer">Félix Lara — Proyectos personales</p>
     </footer>
+
+    <!-- i18next Scripts -->
+    <script src="https://unpkg.com/i18next@23.7.11/i18next.min.js"></script>
+    <script
+        src="https://unpkg.com/i18next-browser-languagedetector@7.2.0/i18nextBrowserLanguageDetector.min.js"></script>
+    <script src="js/translations.js"></script>
+    <script src="js/i18n.js"></script>
 
     <script>
         // Toggle tema (idéntico al de index)
