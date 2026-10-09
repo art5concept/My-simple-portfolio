@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Catálogo de stickers para laptops de Félix Lara.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: {
+      tone: { dark: '#011F26', teal: '#025E73', olive: '#A5A692', beige: '#BFB78F', gold: '#F2A71B' }
+    } } } };
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <title data-i18n="stickers_page.title">Catálogo de stickers</title>
+  <style>body { font-family: 'Inter', sans-serif; }</style>
+</head>
+<body class="bg-gray-50 text-gray-900 dark:bg-tone-dark dark:text-gray-100 transition-colors duration-300">
+  <button id="lang-toggle" class="fixed top-5 right-20 z-50 w-10 h-10 rounded-full bg-white text-gray-500 shadow-lg dark:bg-tone-teal dark:text-gray-200 font-bold text-xs">ES</button>
+  <button id="theme-toggle" aria-label="Toggle theme" class="fixed top-5 right-6 z-50 p-2 rounded-full bg-white text-gray-500 shadow-lg dark:bg-tone-teal dark:text-gray-200">
+    <svg id="theme-toggle-light-icon" class="w-6 h-6 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+    <svg id="theme-toggle-dark-icon" class="w-6 h-6 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+  </button>
+
+  <header class="container mx-auto max-w-5xl px-6 pt-10 pb-8">
+    <nav class="mb-8"><a href="blog.html" class="text-tone-gold hover:underline font-medium" data-i18n="sensor_page.footer_back">← Volver al blog</a></nav>
+    <h1 class="text-3xl md:text-4xl font-bold text-tone-dark dark:text-white mb-3" data-i18n="stickers_page.title">Catálogo de stickers</h1>
+    <p class="text-lg text-gray-600 dark:text-gray-300" data-i18n="stickers_page.intro">Elige tus diseños, selecciona un tamaño y envía tu pedido por WhatsApp.</p>
+  </header>
+
+  <main class="container mx-auto max-w-5xl px-6 pb-20 space-y-8">
+    <section>
+      <h2 class="text-2xl font-bold text-tone-dark dark:text-white mb-5" data-i18n="stickers_page.catalog_title">Diseños disponibles</h2>
+      <div id="sticker-catalog" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4" aria-label="Sticker catalog"></div>
+    </section>
+
+    <section class="grid lg:grid-cols-5 gap-8">
+      <div class="lg:col-span-3">
+        <h2 class="text-2xl font-bold text-tone-dark dark:text-white mb-5" data-i18n="stickers_page.order_title">Tu selección</h2>
+        <div id="selected-stickers" class="space-y-3"></div>
+        <div class="mt-6 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-5">
+          <div id="order-summary" class="space-y-1 text-sm"></div>
+          <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 flex justify-between items-center font-bold text-lg">
+            <span data-i18n="stickers_page.total">Total</span><span id="order-total" class="text-tone-gold">$0.00</span>
+          </div>
+        </div>
+      </div>
+      <form id="sticker-order-form" class="lg:col-span-2 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-6 space-y-4">
+        <h2 class="text-xl font-bold text-tone-dark dark:text-white" data-i18n="stickers_page.customer_title">Datos para el pedido</h2>
+        <label class="block"><span class="block text-sm font-medium mb-1" data-i18n="stickers_page.name">Tu nombre</span>
+          <input name="name" required autocomplete="name" class="w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 px-3 py-2" type="text"></label>
+        <label class="block"><span class="block text-sm font-medium mb-1" data-i18n="stickers_page.phone">Tu número de teléfono</span>
+          <input name="phone" required autocomplete="tel" class="w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 px-3 py-2" type="tel"></label>
+        <p id="order-feedback" role="alert" aria-live="polite"></p>
+        <button type="submit" class="w-full rounded-md bg-tone-gold px-4 py-3 font-semibold text-tone-dark hover:brightness-110" data-i18n="stickers_page.send">Abrir WhatsApp</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="container mx-auto max-w-5xl px-6 pb-12 text-sm text-gray-600 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700 pt-8">
+    <a href="blog.html" class="hover:text-tone-gold hover:underline" data-i18n="sensor_page.footer_back">Volver al listado</a>
+  </footer>
+
+  <script src="https://unpkg.com/i18next@23.7.11/i18next.min.js"></script>
+  <script src="https://unpkg.com/i18next-browser-languagedetector@7.2.0/i18nextBrowserLanguageDetector.min.js"></script>
+  <script src="js/translations.js"></script>
+  <script src="js/sticker-catalog.js"></script>
+  <script src="js/stickers.js"></script>
+  <script src="js/i18n.js"></script>
+  <script>
+    document.getElementById('theme-toggle').addEventListener('click', () => {
+      const dark = document.documentElement.classList.toggle('dark');
+      localStorage.theme = dark ? 'dark' : 'light';
+    });
+    initStickerPage();
+  </script>
+</body>
+</html>
