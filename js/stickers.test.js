@@ -3,7 +3,9 @@ const assert = require('node:assert/strict');
 const {
     calculateOrder,
     buildWhatsAppMessage,
-    validateOrder
+    validateOrder,
+    translatedOrFallback,
+    getDefaultStickerSize
 } = require('./stickers.js');
 const { STICKER_PROMOTIONS } = require('./sticker-catalog.js');
 
@@ -131,6 +133,21 @@ test('uses translated size and promotion labels when a translator is provided', 
     assert.match(message, /Small/);
     assert.match(message, /5 small for \$2\.50/);
     assert.doesNotMatch(message, /Pequeño|pequeños/);
+});
+
+test('uses the sticker number when a translation key is missing', () => {
+    assert.equal(
+        translatedOrFallback(
+            'stickers_page.catalog.09',
+            'Sticker #09',
+            key => key
+        ),
+        'Sticker #09'
+    );
+});
+
+test('uses extra-small as the default sticker size', () => {
+    assert.equal(getDefaultStickerSize(), 'extra-small');
 });
 
 test('rejects an order without customer data or stickers', () => {

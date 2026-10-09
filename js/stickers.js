@@ -7,6 +7,15 @@ const sizeAliases = { xs: 'extra-small', extraSmall: 'extra-small', s: 'small', 
 const cents = value => Math.round(value * 100);
 const money = value => `$${value.toFixed(2)}`;
 
+function translatedOrFallback(key, fallback, translate) {
+    const value = typeof translate === 'function' ? translate(key) : key;
+    return value && value !== key ? value : fallback;
+}
+
+function getDefaultStickerSize() {
+    return 'extra-small';
+}
+
 function calculateOrder(items, pricing = catalog) {
     const sizes = pricing.STICKER_SIZES;
     const promotions = pricing.STICKER_PROMOTIONS;
@@ -83,7 +92,13 @@ function validateOrder(order) {
 }
 
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { calculateOrder, buildWhatsAppMessage, validateOrder };
+    module.exports = {
+        calculateOrder,
+        buildWhatsAppMessage,
+        validateOrder,
+        translatedOrFallback,
+        getDefaultStickerSize
+    };
 } else {
     Object.assign(globalThis, { calculateOrder, buildWhatsAppMessage, validateOrder });
 
@@ -97,7 +112,7 @@ if (typeof module !== 'undefined' && module.exports) {
 
         const chosen = new Map();
         const translate = key => typeof i18next !== 'undefined' ? i18next.t(key) : key;
-        const sizeLabel = size => translate(`stickers_page.sizes.${size.id}`) || size.label;
+        const sizeLabel = size => translatedOrFallback(`stickers_page.sizes.${size.id}`, size.label, translate);
         const moneyLabel = value => `$${value.toFixed(2)}`;
 
         function renderCatalog() {
@@ -115,11 +130,15 @@ if (typeof module !== 'undefined' && module.exports) {
                 image.className = 'w-full aspect-square object-contain rounded-lg bg-gray-100 dark:bg-gray-900';
                 const label = document.createElement('span');
                 label.className = 'mt-2 block text-center font-semibold';
-                label.textContent = translate(`stickers_page.catalog.${item.id}`) || item.label;
+                label.textContent = translatedOrFallback(
+                    `stickers_page.catalog.${item.id}`,
+                    `Sticker #${item.id}`,
+                    translate
+                );
                 card.append(image, label);
                 card.addEventListener('click', () => {
                     if (chosen.has(item.id)) chosen.delete(item.id);
-                    else chosen.set(item.id, STICKER_SIZES[2].id);
+                    else chosen.set(item.id, getDefaultStickerSize());
                     renderCatalog();
                     renderSelection();
                 });
@@ -134,7 +153,11 @@ if (typeof module !== 'undefined' && module.exports) {
                 row.className = 'flex flex-col sm:flex-row sm:items-center gap-3 rounded-lg bg-gray-50 dark:bg-gray-800 p-3';
                 const label = document.createElement('span');
                 label.className = 'font-medium flex-1';
-                label.textContent = translate(`stickers_page.catalog.${id}`) || item.label;
+                label.textContent = translatedOrFallback(
+                    `stickers_page.catalog.${id}`,
+                    `Sticker #${id}`,
+                    translate
+                );
                 const select = document.createElement('select');
                 select.className = 'rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 px-3 py-2';
                 select.setAttribute('aria-label', `${label.textContent} ${translate('stickers_page.size')}`);
@@ -171,7 +194,11 @@ if (typeof module !== 'undefined' && module.exports) {
                 pricing.promotions.forEach(promotion => {
                     const promo = document.createElement('p');
                     promo.className = 'text-tone-teal dark:text-tone-beige';
-                    promo.textContent = `${translate('stickers_page.promotion')}: ${translate(`stickers_page.promotions.${promotion.id}`) || promotion.label}`;
+                    promo.textContent = `${translate('stickers_page.promotion')}: ${translatedOrFallback(
+                        `stickers_page.promotions.${promotion.id}`,
+                        promotion.label,
+                        translate
+                    )}`;
                     summary.append(promo);
                 });
             }
