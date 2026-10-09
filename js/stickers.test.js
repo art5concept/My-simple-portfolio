@@ -114,6 +114,25 @@ test('includes size, unit price, promotion, and total in the WhatsApp message', 
     assert.match(message, /Total: \$2\.50/);
 });
 
+test('uses translated size and promotion labels when a translator is provided', () => {
+    const items = [
+        { id: '01', size: 'small' },
+        { id: '02', size: 'small' },
+        { id: '03', size: 'small' },
+        { id: '04', size: 'small' },
+        { id: '05', size: 'small' }
+    ];
+    const pricing = calculateOrder(items);
+    const message = buildWhatsAppMessage('Ana', '61234567', items, pricing, key => ({
+        'stickers_page.sizes.small': 'Small',
+        'stickers_page.promotions.small-5': '5 small for $2.50'
+    }[key] || key));
+
+    assert.match(message, /Small/);
+    assert.match(message, /5 small for \$2\.50/);
+    assert.doesNotMatch(message, /Pequeño|pequeños/);
+});
+
 test('rejects an order without customer data or stickers', () => {
     assert.deepEqual(validateOrder({ name: '', phone: '', stickers: [] }), {
         valid: false,

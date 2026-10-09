@@ -15,8 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }, function (err, t) {
                 if (err) return console.error('Error loading i18n:', err);
-                updateContent();
-                updateLangButton();
+                updateLanguageState(i18next.language);
             });
     } else {
         console.warn('i18next libraries not loaded');
@@ -33,6 +32,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 element.innerText = i18next.t(key);
             }
         });
+        document.querySelectorAll('[data-i18n-aria-label]').forEach(function (element) {
+            element.setAttribute('aria-label', i18next.t(element.getAttribute('data-i18n-aria-label')));
+        });
+    }
+
+    function updateLanguageState(language) {
+        document.documentElement.lang = language.substring(0, 2);
+        updateContent();
+        updateLangButton();
     }
 
     function updateLangButton() {
@@ -49,10 +57,10 @@ document.addEventListener('DOMContentLoaded', function () {
         langBtn.addEventListener('click', function () {
             const currentLang = i18next.language.substring(0, 2);
             const newLang = currentLang === 'es' ? 'en' : 'es';
-            i18next.changeLanguage(newLang, function () {
-                updateContent();
-                updateLangButton();
-            });
+            i18next.changeLanguage(newLang);
         });
+    }
+    if (typeof i18next !== 'undefined' && i18next.on) {
+        i18next.on('languageChanged', updateLanguageState);
     }
 });

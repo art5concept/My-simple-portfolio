@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" rx="36" fill="#011F26"/>
+  <circle cx="200" cy="140" r="86" fill="#BFB78F"/>
+  <path d="M145 150q55 60 110 0" fill="none" stroke="#011F26" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="170" cy="116" r="10" fill="#011F26"/><circle cx="230" cy="116" r="10" fill="#011F26"/>
+  <text x="200" y="255" text-anchor="middle" font-family="Arial" font-size="26" font-weight="700" fill="#F2A71B">STICKER 05</text>
+</svg>

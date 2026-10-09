@@ -57,15 +57,21 @@ function calculateOrder(items, pricing = catalog) {
     };
 }
 
-function buildWhatsAppMessage(name, phone, items, pricing) {
+function buildWhatsAppMessage(name, phone, items, pricing, translate) {
     if (!pricing && items.every(item => typeof item === 'string')) {
         return `Hola, soy ${name}. Mi número de teléfono es ${phone}. Quiero los stickers: ${items.join(', ')}.`;
     }
     const result = pricing && pricing.total !== undefined ? pricing : calculateOrder(items);
+    const label = typeof translate === 'function' ? translate : key => {
+        const [, category, id] = key.split('.');
+        if (category === 'sizes') return catalog.STICKER_SIZES.find(size => size.id === id)?.label || id;
+        if (category === 'promotions') return catalog.STICKER_PROMOTIONS.find(promotion => promotion.id === id)?.label || id;
+        return key;
+    };
     const itemLines = result.items
-        ? result.items.map(item => `${item.id}: ${item.sizeLabel} (${money(item.unitPrice)})`).join(', ')
+        ? result.items.map(item => `${item.id}: ${label(`stickers_page.sizes.${item.size}`)} (${money(item.unitPrice)})`).join(', ')
         : items.join(', ');
-    const promotions = result.promotions.map(promotion => `${promotion.quantity > 1 ? `${promotion.quantity} × ` : ''}${promotion.label}`).join('; ') || 'Ninguna';
+    const promotions = result.promotions.map(promotion => `${promotion.quantity > 1 ? `${promotion.quantity} × ` : ''}${label(`stickers_page.promotions.${promotion.id}`)}`).join('; ') || 'Ninguna';
     return `Hola, soy ${name}. Mi número de teléfono es ${phone}. Quiero los stickers: ${itemLines}. Promociones: ${promotions}. Total: ${money(result.total)}.`;
 }
 
@@ -188,7 +194,13 @@ if (typeof module !== 'undefined' && module.exports) {
             }
             feedback.textContent = '';
             const pricing = calculateOrder(order.stickers);
-            const message = buildWhatsAppMessage(order.name.trim(), order.phone.trim(), order.stickers, pricing);
+            const message = buildWhatsAppMessage(
+                order.name.trim(),
+                order.phone.trim(),
+                order.stickers,
+                pricing,
+                translate
+            );
             window.open(`https://wa.me/50764530015?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
         });
 
