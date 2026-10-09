@@ -21,3 +21,4 @@ node_modules/
 
 # === Imagenes previas ===
 images/locals/
+.worktrees/
