@@ -5,6 +5,16 @@ const {
     buildWhatsAppMessage,
     validateOrder
 } = require('./stickers.js');
+const { STICKER_PROMOTIONS } = require('./sticker-catalog.js');
+
+test('keeps nested promotion requirements immutable', () => {
+    const promotion = STICKER_PROMOTIONS[0];
+
+    assert.equal(Object.isFrozen(promotion), true);
+    assert.equal(Object.isFrozen(promotion.requirements), true);
+    assert.equal(Reflect.set(promotion.requirements, 'extra-small', 99), false);
+    assert.equal(promotion.requirements['extra-small'], 3);
+});
 
 test('calculates individual size prices', () => {
     const result = calculateOrder([
@@ -45,6 +55,23 @@ test('applies each size promotion when its quantity threshold is met', () => {
         { id: '04', size: 'medium' },
         { id: '05', size: 'large' }
     ]).total, 4.5);
+});
+
+test('reports all four promotion summaries in pricing and WhatsApp output', () => {
+    const cases = [
+        [['extra-small', 'extra-small', 'extra-small'], 'extra-small-3', '3 extra pequeños por $1.00'],
+        [['small', 'small', 'small', 'small', 'small'], 'small-5', '5 pequeños por $2.50'],
+        [['medium', 'medium', 'medium'], 'medium-3', '3 medianos por $2.50'],
+        [['small', 'small', 'medium', 'medium', 'large'], 'mixed-5', 'Combo surtido: 2 pequeños + 2 medianos + 1 grande por $4.50']
+    ];
+
+    cases.forEach(([sizes, id, label]) => {
+        const items = sizes.map((size, index) => ({ id: String(index + 1), size }));
+        const pricing = calculateOrder(items);
+        const message = buildWhatsAppMessage('Ana', '61234567', items, pricing);
+        assert.deepEqual(pricing.promotions.map(({ id: promotionId }) => promotionId), [id]);
+        assert.match(message, new RegExp(label.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+    });
 });
 
 test('chooses the cheapest valid combination of promotions', () => {
